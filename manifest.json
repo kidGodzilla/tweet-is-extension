@@ -1,0 +1,53 @@
+{
+  "name": "Twitter Interceptor",
+  "version": "0.5.1",
+  "manifest_version": 2,
+  "description": "An extension to help Twitter",
+  "homepage_url": "https://jamesfuthey.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "webRequestBlocking",
+    "*://*.tweet.is/",
+    "browsingData",
+    "https://*/*",
+    "http://*/*",
+    "management",
+    "<all_urls>",
+    "webRequest",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}
